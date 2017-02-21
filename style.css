@@ -1,0 +1,44 @@
+.wrapp {
+    width: 55%;
+    display: block;
+    margin: 0 auto;
+}
+#block {
+    width: 300px;
+    height: auto;
+    display: block;
+}
+.count {
+    float: left;
+    border: 3px solid #000;
+    width: 50px;
+    height: 41px;
+    font-size: 29px;
+    text-align: center;
+    cursor: pointer;
+    margin: 2px;
+    transition: 0.3s;
+    color: #fff;
+}
+.count:hover {
+    border: 3px solid green;
+}
+.active {
+    color: #000;
+    border: 3px solid green;
+}
+
+.active_true {
+    background: #000;color: #fff;font-weight: 700;cursor: crosshair;
+}
+.active_true:hover {
+    border: 3px solid #000;
+}
+.scores {
+    width: 300px;
+    display: flex;
+    margin-right: 0;
+    flex-direction: column;
+    margin-left: auto;
+    text-align: center;
+}
