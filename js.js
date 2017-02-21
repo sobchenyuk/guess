@@ -79,18 +79,22 @@ for (var a = 0; a < count.length; a++){
                 }
             }
 
-            if(text1 == text2){
+            if(text1 !== text2 && c >= 2 || text1 == text2 && value1 == value2){
+
+                setTimeout(func, 200);
+
+            }else if(text1 == text2){
 
                 count[value1].className = "count active_true";
                 count[value2].className = "count active_true";
                 arr4.length = 0;
                 c = 0;
                 points.innerHTML = q++;
-            }else if(text1 !== text2 && c >= 2){
+            }/*else if(text1 !== text2 && c >= 2 || text1 == text2 && value1 == value2){
 
                 setTimeout(func, 200);
 
-            }
+            }*/
 
                 attempts.innerHTML = w++;
 
