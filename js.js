@@ -2,48 +2,65 @@
  * Created by Андрей on 21.02.2017.
  */
 
-var arr = [];
+(function () {
+var s;
 
 alert("Выберите количество клеточек");
-if (confirm("6")) {
-   arr = [1, 2, 3];
+if (s = confirm("6")) {
+    s = 3;
+    recalculate(s);
 } else {
     if (confirm("12")) {
-    arr = [1, 2, 3, 4, 5, 6];
+        s = 6;
+        recalculate(s);
     } else {
         if (confirm("24")) {
-            arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+            s = 12;
+            recalculate(s);
         }else {
-            arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+            s = 12;
+            recalculate(s);
         }
     }
 }
 
 
+function recalculate(s) {
+
+    var arr = [];
+    var arr2 = [];
+
+    for (var b = 0; b < s; b++) {
+        arr[b] = b;
+    }
 
 
-//var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-var arr2 = [];
-arr2 = arr;
-var arr3 = arr2.concat(arr);
-var count,datNumber,w,q,m;
+    arr2 = arr;
+    var arr3 = arr2.concat(arr);
+
+
+
+    function compareRandom(a, b) {
+        return Math.random() - 0.5;
+    }
+    arr3.sort(compareRandom);
+    var block = document.querySelector('#block');
+    for (var i = 0; i < arr3.length; i++) {
+        var div = document.createElement('div');
+        div.className = "count";
+        div.setAttribute('data-number', i);
+        div.innerHTML = arr3[i];
+        block.appendChild(div);
+
+    }
+}
+
+
+
 var arr4 = [];
+var count,datNumber,w,q,m;
 var attempts,points,active_true;
-function compareRandom(a, b) {
-    return Math.random() - 0.5;
-}
-arr3.sort(compareRandom);
-var block = document.querySelector('#block');
-for (var i = 0; i < arr3.length; i++) {
-    var div = document.createElement('div');
-    div.className = "count";
-    div.setAttribute('data-number', i);
-    div.innerHTML = arr3[i];
-    block.appendChild(div);
-
-}
-
-
+var b;
 
 attempts = document.querySelector('.attempts');
 points = document.querySelector('.points');
@@ -57,18 +74,22 @@ w = 1;
 q = 1;
 m = 1;
 
-count = document.querySelectorAll('#block .count');
-var b;
+recalculateFunc();
 
-for (var a = 0; a < count.length; a++){
+function recalculateFunc() {
 
-    var c = 0;
-    var col = a;
+    count = document.querySelectorAll('#block .count');
 
-    count[a].onclick= function(e) {
-        datNumber = this.getAttribute('data-number');
 
-        c++;
+    for (var a = 0; a < count.length; a++){
+
+        var c = 0;
+        var col = a;
+
+        count[a].onclick= function(e) {
+            datNumber = this.getAttribute('data-number');
+
+            c++;
 
             this.className += " active";
 
@@ -110,35 +131,35 @@ for (var a = 0; a < count.length; a++){
                 arr4.length = 0;
                 c = 0;
                 points.innerHTML = q++;
-            }/*else if(text1 !== text2 && c >= 2 || text1 == text2 && value1 == value2){
 
-                setTimeout(func, 200);
-
-            }*/
-
-                attempts.innerHTML = w++;
-
-        activeTrue = document.querySelectorAll('#block .active_true');
-
-        for (var a = 0; a < activeTrue.length; a++) {
-           var aColl = a;
-        }
-
-        if(aColl == col){
-            wins.innerHTML = m++;
-
-            alert('Поздравляем с победой');
-
-            arr4.length = 0;
-            c = 0;
-            for (var n = 0; n < count.length; n++) {
-                count[n].classList.remove("active_true");
             }
-        }
-    };
 
+            attempts.innerHTML = w++;
 
+            activeTrue = document.querySelectorAll('#block .active_true');
 
+            for (var a = 0; a < activeTrue.length; a++) {
+                var aColl = a;
+            }
 
+            if(aColl == col){
+                wins.innerHTML = m++;
 
+                alert('Поздравляем с победой');
+
+                arr4.length = 0;
+                c = 0;
+                for (var n = 0; n < count.length; n++) {
+                    //count[n].classList.remove("active_true");
+                    count[n].remove();
+                }
+
+                recalculate(s);
+                recalculateFunc();
+            }
+        };
+
+    }
 }
+
+})();
